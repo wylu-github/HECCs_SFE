@@ -1,4 +1,3 @@
-# HECCs_stacking_fault_energies
 # ANN Models for Stacking Fault Energy Prediction in HECCs
 
 This repository contains artificial neural network (ANN) models for predicting the stacking fault energies (SFEs) of high-entropy carbide ceramics (HECCs).
