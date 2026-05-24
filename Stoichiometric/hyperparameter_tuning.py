@@ -52,7 +52,7 @@ def hyperparameter_tuning(features, targets, num_epochs=50, output_file="tuning_
     best_loss = float('inf')
     best_params = None
 
-    results = []  # 用于存储超参数及对应损失
+    results = []  
 
     for hidden_size in hidden_sizes:
         for lr in learning_rates:
@@ -88,7 +88,6 @@ def hyperparameter_tuning(features, targets, num_epochs=50, output_file="tuning_
                     best_loss = avg_loss
                     best_params = {'hidden_size': hidden_size, 'lr': lr, 'batch_size': batch_size}
 
-    # 保存到 Excel
     df = pd.DataFrame(results, columns=['Hidden Size', 'Learning Rate', 'Batch Size', 'Average Loss'])
     df.to_excel(output_file, index=False)
     print(f"Tuning results saved to {output_file}")
