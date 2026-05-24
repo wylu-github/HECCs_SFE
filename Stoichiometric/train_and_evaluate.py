@@ -14,18 +14,16 @@ import random
 
 
 def set_seed(seed):
-    """固定随机种子以确保结果一致"""
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
     torch.cuda.manual_seed(seed)
-    torch.backends.cudnn.benchmark = False  # 禁止动态优化
+    torch.backends.cudnn.benchmark = False  
 
 
 def train_model(model, train_loader, criterion, optimizer, num_epochs=50):
     model.train()
 
-    # 保存每个epoch的训练损失和测试损失
     train_losses = []
     test_losses = []
 
@@ -42,7 +40,6 @@ def train_model(model, train_loader, criterion, optimizer, num_epochs=50):
         avg_loss = running_loss / len(train_loader)
         train_losses.append(avg_loss)
 
-        # 每个epoch结束后在验证集上计算测试损失
         model.eval()
         with torch.no_grad():
             test_loss = 0.0
@@ -71,13 +68,13 @@ def evaluate_model(model, train_loader, test_loader):
     with torch.no_grad():
         for inputs, labels in train_loader:
             outputs = model(inputs)
-            all_train_preds.extend(outputs.cpu().numpy().flatten())  # 转换为标量
-            all_train_labels.extend(labels.cpu().numpy().flatten())  # 转换为标量
+            all_train_preds.extend(outputs.cpu().numpy().flatten())  
+            all_train_labels.extend(labels.cpu().numpy().flatten())  
 
         for inputs, labels in test_loader:
             outputs = model(inputs)
-            all_test_preds.extend(outputs.cpu().numpy().flatten())  # 转换为标量
-            all_test_labels.extend(labels.cpu().numpy().flatten())  # 转换为标量
+            all_test_preds.extend(outputs.cpu().numpy().flatten())  
+            all_test_labels.extend(labels.cpu().numpy().flatten()) 
 
     train_r2 = r2_score(all_train_labels, all_train_preds)
     train_mae = mean_absolute_error(all_train_labels, all_train_preds)
@@ -101,7 +98,6 @@ def evaluate_model(model, train_loader, test_loader):
 
 
 def plot_learning_curve(train_losses, test_losses):
-    # 绘制训练和测试损失曲线
     plt.plot(train_losses, label='Training Loss')
     plt.plot(test_losses, label='Test Loss')
     plt.xlabel('Epochs')
