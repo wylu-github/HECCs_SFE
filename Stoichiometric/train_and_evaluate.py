@@ -112,7 +112,7 @@ if __name__ == "__main__":
     set_seed(SEED)
 
     # Load data
-    data = pd.read_excel(r'..\get_feature\features_train_4NN.xlsx')
+    data = pd.read_excel(r'features_train_4NN.xlsx')
     features = data.iloc[:, 1:-1].values
     targets = data.iloc[:, -1].values
 
